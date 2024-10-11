@@ -39,15 +39,17 @@ def _load_win_support(path):
         if dll in _loaded_windows_dlls:
             continue
 
+        print('UNICORN LIB PATH is:', path)
+
         lib_file = os.path.join(path, dll)
         if ('/' not in path and '\\' not in path) or os.path.exists(lib_file):
             try:
-                #print('Trying to load Windows library', lib_file)
+                print('Trying to load Windows library', lib_file)
                 ctypes.cdll.LoadLibrary(lib_file)
-                #print('SUCCESS')
+                print('SUCCESS')
                 _loaded_windows_dlls.add(dll)
             except OSError as e:
-                #print('FAIL to load %s' %lib_file, e)
+                print('FAIL to load %s' %lib_file, e)
                 continue
 
 # Initial attempt: load all dlls globally

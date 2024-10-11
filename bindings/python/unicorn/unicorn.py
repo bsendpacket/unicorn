@@ -61,13 +61,19 @@ def _load_lib(path):
         if sys.platform in ('win32', 'cygwin'):
             _load_win_support(path)
 
+        print('UNICORN (UNIX) LIB PATH is:', path)
+
         lib_file = os.path.join(path, _lib.get(sys.platform, 'libunicorn.so'))
-        #print('Trying to load shared library', lib_file)
+
+        print('Trying to load shared library', lib_file)
+
         dll = ctypes.cdll.LoadLibrary(lib_file)
-        #print('SUCCESS')
+
+        print('SUCCESS')
         return dll
+
     except OSError as e:
-        #print('FAIL to load %s' %lib_file, e)
+        print('FAIL to load %s' %lib_file, e)
         return None
 
 _uc = None
